@@ -93,6 +93,10 @@ function Home() {
                 });
                 setFlightSchedule(modifiedData);
                 setIsDataLoaded(true);
+                if (animation) {
+                    animation.stop();
+                    animation.destroy();
+                }
             } catch (error) {
                 console.log(error);
             }
