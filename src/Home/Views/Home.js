@@ -13,27 +13,27 @@ function Home() {
             'flightId': 1,
             'flightName': 'FlyJinnah-401',
             'depCity': 'Khi',
-            'depTime': '02:00',
+            'depTime': '01/20/2023',
             'arrivCity': 'Isl',
-            'arivTime': '04:00',
+            'arivTime': '01/20/2023',
             'status': 'hold'
         },
         {
             'flightId': 2,
             'flightName': 'FlyJinnah-401',
             'depCity': 'Khi',
-            'depTime': '02:00',
+            'depTime': '01/20/2023',
             'arrivCity': 'Isl',
-            'arivTime': '04:00',
+            'arivTime': '01/20/2023',
             'status': 'hold'
         },
         {
             'flightId': 3,
             'flightName': 'FlyJinnah-401',
             'depCity': 'Khi',
-            'depTime': '02:00',
+            'depTime': '01/20/2023',
             'arrivCity': 'Isl',
-            'arivTime': '04:00',
+            'arivTime': '01/20/2023',
             'status': 'hold'
         },
     ]);
