@@ -173,7 +173,7 @@ function Home() {
                                                     <td>
                                                         <Form.Group controlId="formDepartureTime">
                                                             <Form.Label>Departure Time</Form.Label>
-                                                            <Form.Control type="time" value={formValues.departureTime} onChange={(event) => { setFormValues({ ...formValues, 'departureTime': event.target.value }) }} />
+                                                            <Form.Control type="date" value={formValues.departureTime} onChange={(event) => { setFormValues({ ...formValues, 'departureTime': event.target.value }) }} />
                                                         </Form.Group>
                                                     </td>
                                                 </tr>
@@ -189,7 +189,7 @@ function Home() {
                                                     <td>
                                                         <Form.Group controlId="formArrivalTime">
                                                             <Form.Label>Arrival Time</Form.Label>
-                                                            <Form.Control type="time" value={formValues.arrivalTime} onChange={(event) => { setFormValues({ ...formValues, 'arrivalTime': event.target.value }) }} />
+                                                            <Form.Control type="date" value={formValues.arrivalTime} onChange={(event) => { setFormValues({ ...formValues, 'arrivalTime': event.target.value }) }} />
                                                         </Form.Group>
                                                     </td>
                                                 </tr>
@@ -272,7 +272,7 @@ function Home() {
                                                     <td>
                                                         <Form.Group controlId="formDepartureTime">
                                                             <Form.Label>Departure Time</Form.Label>
-                                                            <Form.Control type="time" value={formValues.departureTime} onChange={(event) => { setFormValues({ ...formValues, 'departureTime': event.target.value }) }} />
+                                                            <Form.Control type="date" value={formValues.departureTime} onChange={(event) => { setFormValues({ ...formValues, 'departureTime': event.target.value }) }} />
                                                         </Form.Group>
                                                     </td>
                                                 </tr>
@@ -288,7 +288,7 @@ function Home() {
                                                     <td>
                                                         <Form.Group controlId="formArrivalTime">
                                                             <Form.Label>Arrival Time</Form.Label>
-                                                            <Form.Control type="time" value={formValues.arrivalTime} onChange={(event) => { setFormValues({ ...formValues, 'arrivalTime': event.target.value }) }} />
+                                                            <Form.Control type="date" value={formValues.arrivalTime} onChange={(event) => { setFormValues({ ...formValues, 'arrivalTime': event.target.value }) }} />
                                                         </Form.Group>
                                                     </td>
                                                 </tr>
