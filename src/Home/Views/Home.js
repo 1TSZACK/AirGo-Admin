@@ -9,33 +9,33 @@ import Form from 'react-bootstrap/Form';
 
 function Home() {
     const [flightSchedule, setFlightSchedule] = useState([
-        {
-            'flightId': 1,
-            'flightName': 'FlyJinnah-401',
-            'depCity': 'Khi',
-            'depTime': '01/20/2023',
-            'arrivCity': 'Isl',
-            'arivTime': '01/20/2023',
-            'status': 'hold'
-        },
-        {
-            'flightId': 2,
-            'flightName': 'FlyJinnah-401',
-            'depCity': 'Khi',
-            'depTime': '01/20/2023',
-            'arrivCity': 'Isl',
-            'arivTime': '01/20/2023',
-            'status': 'hold'
-        },
-        {
-            'flightId': 3,
-            'flightName': 'FlyJinnah-401',
-            'depCity': 'Khi',
-            'depTime': '01/20/2023',
-            'arrivCity': 'Isl',
-            'arivTime': '01/20/2023',
-            'status': 'hold'
-        },
+        // {
+        //     'id': 1,
+        //     'flightname': 'FlyJinnah-401',
+        //     'deptcity': 'Khi',
+        //     'depttime': '2023-05-11',
+        //     'arrivalcity': 'Isl',
+        //     'arrivaltime': '2023-05-11',
+        //     'status': 'hold'
+        // },
+        // {
+        //     'id': 2,
+        //     'flightname': 'FlyJinnah-401',
+        //     'deptcity': 'Khi',
+        //     'depttime': '2023-05-11',
+        //     'arrivalcity': 'Isl',
+        //     'arrivaltime': '2023-05-11',
+        //     'status': 'hold'
+        // },
+        // {
+        //     'id': 3,
+        //     'flightname': 'FlyJinnah-401',
+        //     'deptcity': 'Khi',
+        //     'depttime': '2023-05-11',
+        //     'arrivalcity': 'Isl',
+        //     'arrivaltime': '2023-05-11',
+        //     'status': 'hold'
+        // },
     ]);
     const [sessionZ,setSessionZ] = useState(1);
     const [showInsertModal, setShowInsertModal] = useState(false);
@@ -70,6 +70,10 @@ function Home() {
     },[checkedRows])
     useEffect(() => {
         const fetchData = async () => {
+            fetch('http://localhost:3300/flight')
+            .then(response => response.json())
+            .then(data => setFlightSchedule(data))
+            .catch(error => console.log(error));
             setIsDataLoaded(true);
         };
         const timeout = setTimeout(() => {
@@ -123,15 +127,15 @@ function Home() {
                         <tr key={schedule.flightId} onClick={() => {
 
                         }}>
-                            <td>{schedule.flightId}</td>
-                            <td>{schedule.flightName}</td>
-                            <td>{schedule.depCity}</td>
-                            <td>{schedule.depTime}</td>
-                            <td>{schedule.arrivCity}</td>
-                            <td>{schedule.arivTime}</td>
+                            <td>{schedule.id}</td>
+                            <td>{schedule.flightname}</td>
+                            <td>{schedule.deptcity}</td>
+                            <td>{schedule.depttime}</td>
+                            <td>{schedule.arrivalcity}</td>
+                            <td>{schedule.arrivaltime}</td>
                             <td>{schedule.status}</td>
                             <td>
-                                <input type="checkbox" checked={checkedRows.includes(schedule.flightId)} onChange={(event) => handleCheckboxChange(event, schedule.flightId)} />
+                                <input type="checkbox" checked={checkedRows.includes(schedule.id)} onChange={(event) => handleCheckboxChange(event, schedule.id)} />
                             </td>
                         </tr>
                     ))}
@@ -205,12 +209,12 @@ function Home() {
                                         setFlightSchedule([
                                             ...flightSchedule,
                                             {
-                                                'flightId': 4,
-                                                'flightName': formValues.flightName,
-                                                'depCity': formValues.departureCity,
-                                                'depTime': formValues.departureTime,
-                                                'arrivCity': formValues.arrivalCity,
-                                                'arivTime': formValues.arrivalTime,
+                                                'id': 4,
+                                                'flightname': formValues.flightName,
+                                                'deptcity': formValues.departureCity,
+                                                'depttime': formValues.departureTime,
+                                                'arrivalcity': formValues.arrivalCity,
+                                                'arrivaltime': formValues.arrivalTime,
                                                 'status': 'hold'
                                             }
                                         ]);
@@ -234,7 +238,7 @@ function Home() {
                                         Close
                                     </Button>
                                     <Button variant="primary" onClick={() => {
-                                        setFlightSchedule(flightSchedule.filter(obj => !checkedRows.includes(obj.flightId)));
+                                        setFlightSchedule(flightSchedule.filter(obj => !checkedRows.includes(obj.id)));
                                         setShowDeleteModal(false);
                                         setSessionZ(sessionZ+1);
                                         setCheckedRows([]);
@@ -297,19 +301,25 @@ function Home() {
                                     </Form>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button className='fbc' variant="secondary" onClick={() => { setShowEditModal(false); }} style={{ backgroundColor: 'red', color: 'white' }}>
+                                    <Button className='fbc' variant="secondary" onClick={() => { setShowEditModal(false); setFormValues({
+                                            'flightName': '',
+                                            'departureCity': '',
+                                            'departureTime': '',
+                                            'arrivalCity': '',
+                                            'arrivalTime': '',
+                                        });}} style={{ backgroundColor: 'red', color: 'white' }}>
                                         Close
                                     </Button>
                                     <Button variant="primary" onClick={() => {
                                         setFlightSchedule(flightSchedule.map(item=>{
-                                            if(item.flightId===checkedRows[0]){
+                                            if(item.id===checkedRows[0]){
                                                 return {
                                                     ...item,
-                                                    'flightName': formValues.flightName,
-                                                    'depCity': formValues.departureCity,
-                                                    'depTime': formValues.departureTime,
-                                                    'arrivCity': formValues.arrivalCity,
-                                                    'arivTime': formValues.arrivalTime,
+                                                    'flightname': formValues.flightName,
+                                                    'deptcity': formValues.departureCity,
+                                                    'depttime': formValues.departureTime,
+                                                    'arrivalcity': formValues.arrivalCity,
+                                                    'arrivaltime': formValues.arrivalTime,
                                                 }
                                             }
                                             else{
@@ -336,11 +346,11 @@ function Home() {
                                     <button style={{ backgroundColor: editEnable === true ? 'blue' : 'grey' }} onClick={()=>{
                                         if(editEnable===true){
                                             setFormValues({
-                                                'flightName': flightSchedule.find(item => item.flightId === checkedRows[0]).flightName,
-                                                'departureCity': flightSchedule.find(item => item.flightId === checkedRows[0]).depCity,
-                                                'departureTime': flightSchedule.find(item => item.flightId === checkedRows[0]).depTime,
-                                                'arrivalCity': flightSchedule.find(item => item.flightId === checkedRows[0]).arrivCity,
-                                                'arrivalTime': flightSchedule.find(item => item.flightId === checkedRows[0]).arivTime,
+                                                'flightName': flightSchedule.find(item => item.id === checkedRows[0]).flightname,
+                                                'departureCity': flightSchedule.find(item => item.id === checkedRows[0]).deptcity,
+                                                'departureTime': flightSchedule.find(item => item.id === checkedRows[0]).depttime,
+                                                'arrivalCity': flightSchedule.find(item => item.id === checkedRows[0]).arrivalcity,
+                                                'arrivalTime': flightSchedule.find(item => item.id === checkedRows[0]).arrivaltime,
                                             });
                                             setShowEditModal(true);
                                         }}}>Edit</button>
